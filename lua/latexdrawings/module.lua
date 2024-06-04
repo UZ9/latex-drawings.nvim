@@ -23,14 +23,10 @@ function M.begin_drawing()
 	local directory_path = vim.fn.getcwd() .. "/" .. M.DIRECTORY_NAME
 	local file_name = "test.svg"
 
-	if not vim.fn.isdirectory(directory_path) then
+	if vim.fn.isdirectory(directory_path) == 0 then
+    print(directory_path .. " not found, so creating it now...")
 		vim.fn.mkdir(directory_path)
 	end
-
-	print(vim.fn.getcwd())
-	print("Started drawing...")
-	print(directory_path)
-	print(directory_path .. "/" .. file_name)
 
 	start_inkscape(directory_path .. "/" .. file_name)
 end
