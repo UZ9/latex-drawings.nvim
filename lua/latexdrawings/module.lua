@@ -35,35 +35,6 @@ function M.begin_drawing()
 		)
 	end
 
-	-- Might eventually switch to a listener for this, but unnecessary while this is still sync
-	-- local function start_watching_inkscape_file(file)
-	-- 	print("Starting watch on " .. file)
-	--
-	-- 	local handle = vim.loop.new_fs_event()
-	--
-	-- 	local unwatch_callback = function()
-	-- 		vim.loop.fs_event_stop(handle)
-	-- 	end
-	--
-	-- 	local watch_callback = function(_, _, _)
-	-- 		print("INKSCAPE FILE WAS CHANGED")
-	-- 	end
-	--
-	-- 	local event_callback = function(err, filename, events)
-	-- 		print("Experienced event callback")
-	-- 		if err then
-	-- 			print("ERROR: " .. err)
-	-- 		else
-	-- 			watch_callback(filename, events, unwatch_callback)
-	-- 		end
-	-- 	end
-	--
-	-- 	vim.loop.fs_event_start(handle, file, { watch_entry = false, stat = false, recursive = false }, event_callback)
-	--
-	-- 	return handle
-	-- end
-	-- inkscapecom --export-type="pdf" --export-latex test.svg
-
 	local function add_latex_snippet(figure_name)
 		local snippet_text = {
 			[[\begin{figure}]] .. "[ht]",
