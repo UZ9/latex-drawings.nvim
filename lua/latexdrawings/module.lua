@@ -1,15 +1,9 @@
 local M = {}
 
 M.DIRECTORY_NAME = "Diagrams"
--- M.CREATE_INKSCAPE_COMMAND = "inkscapecom --actions="file-new; export-area-page; export-filename:diagram.svg; export-do;""
-
-function M.stop_drawing()
-	print("Stopped drawing")
-end
 
 function M.begin_drawing()
 	local function run_command(command)
-		print('Executing "' .. command .. '"')
 		local handle = io.popen(command)
 
 		if handle then
@@ -23,8 +17,6 @@ function M.begin_drawing()
 	end
 
 	local function create_inkscape_file(file_path, file_name)
-		print("Creating " .. file_name .. ".svg at " .. file_path)
-
 		-- TODO: inkscapecom is a windows specific, find some way of making this universal
 		run_command(
 			[[inkscapecom --actions="file-new; export-area-page; export-filename:]]
@@ -56,8 +48,6 @@ function M.begin_drawing()
 		-- Attempt to create new inkscape file
 		create_inkscape_file(file_path, file_name)
 
-		-- start_watching_inkscape_file(file_path .. "/" .. file_name .. ".svg")
-
 		run_command("inkscapecom " .. file_path .. "/" .. file_name .. ".svg")
 
 		-- At this point, user has closed inkscape and main thread is no longer locked, we now export into latex
@@ -71,16 +61,10 @@ function M.begin_drawing()
 	local file_name = "test"
 
 	if vim.fn.isdirectory(directory_path) == 0 then
-		print(directory_path .. " not found, so creating it now...")
 		vim.fn.mkdir(directory_path)
 	end
 
 	start_inkscape(directory_path, file_name)
-end
-
-function M.handle_stdout(_, data)
-	print("stdout called")
-	print(data)
 end
 
 function M.setup(opts)
