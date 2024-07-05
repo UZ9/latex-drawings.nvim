@@ -1,6 +1,6 @@
 local M = {}
 
-M.DIRECTORY_NAME = "Diagrams"
+M.DIAGRAM_DIRECTORY_NAME = "Diagrams"
 
 function M.begin_drawing()
 	local function run_command(command)
@@ -57,7 +57,7 @@ function M.begin_drawing()
 		add_latex_snippet(file_name)
 	end
 
-	local directory_path = vim.fn.getcwd() .. "/" .. M.DIRECTORY_NAME
+	local directory_path = vim.fn.getcwd() .. "/" .. M.DIAGRAM_DIRECTORY_NAME
 	local file_name = "test"
 
 	if vim.fn.isdirectory(directory_path) == 0 then
